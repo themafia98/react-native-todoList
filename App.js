@@ -1,25 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
+import styles from './App.style';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import Header from './Components/Header';
+import Controllers from './Components/Controllers/Controllers';
+import Container from './Components/Container';
 
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title} >Todo-list</Text>
       <StatusBar style="auto" />
+      <Header />
+      <Controllers />
+      <Container />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    color: 'red',
-    fontSize: 25
-  }
-});
+export default App;
+
