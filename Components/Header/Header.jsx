@@ -1,10 +1,14 @@
 import React from 'react';
 import style from './Header.style';
-import { Text, TextPropTypes } from 'react-native';
+import Controllers from '../Controllers';
+import { Text, TextPropTypes, View } from 'react-native';
 
 const Header = ({ title }) => {
     return (
-    <Text style={style.title}>{title}</Text>
+    <View>
+        <Text style={style.title}>{title}</Text>
+        <Controllers />
+    </View>
     )
 };
 

@@ -2,7 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     title: {
-        color: 'red',
-        fontSize: 25
+        fontWeight: 900,
+        fontSize: 45,
+        color: "#483d8b",
+        textAlign: "center",
+        marginBottom: 0,
       }
 });

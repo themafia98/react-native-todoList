@@ -1,10 +1,14 @@
 import React from 'react';
-import { Text } from 'react-native';
+import style from './Controllers.style';
+import { View, TextInput, Button } from 'react-native';
 
-const Controllers = () => {
+const Controllers = ({}) => {
 
     return (
-        <Text>Controllers</Text>
+        <View style={style.controllers}>
+            <TextInput style={style.inputText} placeholder="Enter todo" />
+            <Button title="submit" />
+        </View>
     )
 };
 
