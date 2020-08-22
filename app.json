@@ -17,7 +17,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.themafia98.todoList",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.themafia98.todoList",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
