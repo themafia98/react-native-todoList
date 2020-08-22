@@ -2,11 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     controllers: {
+        flex: 1,
         width: "50%",
-        position: "relative",
-        alignSelf: "center",
         flexDirection: "column",
-        justifyContent: "center"
+        alignItems: "center"
     },
     inputText: {
         margin: 2,
@@ -17,7 +16,7 @@ export default StyleSheet.create({
         borderWidth: 1
     },
     addButton: {
-        width: 50,
+        width: 120,
         fontWeight: 700,
         alignSelf: "center",
         cursor: "pointer",
@@ -25,13 +24,14 @@ export default StyleSheet.create({
         color: "red",
     },
     sortControllersContainer: {
-        width: "30%",
         flexDirection: "row",
         marginTop: 10,
         marginBottom: 5,
         justifyContent: "space-between"
     },
     sortButton: {
-        width: "30px",
+        width: 30,
+        borderRadius: 0,
+        marginLeft: 5
     }
 });

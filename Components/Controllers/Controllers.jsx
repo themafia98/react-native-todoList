@@ -1,7 +1,8 @@
 import React from 'react';
 import DatePicker from 'react-native-datepicker';
 import style from './Controllers.style';
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput } from 'react-native';
+import Button from '../Button/Button';
 
 const Controllers = ({}) => {
 
@@ -9,12 +10,12 @@ const Controllers = ({}) => {
         <View style={style.controllers}>
             <TextInput style={style.inputText} placeholder="What should you do?" />
             <DatePicker />
-            <Button style={style.addButton} title="add" />
+            <Button customStyle={style.addButton}>add</Button>
             <View style={style.sortControllersContainer}>
-                <Button title="past" style={style.sortButton} />
-                <Button title="current" style={style.sortButton} />
-                <Button title="future" style={style.sortButton} />
-                <Button title="all" style={style.sortButton} />
+                <Button customStyle={style.sortButton}>past</Button>
+                <Button customStyle={style.sortButton}>current</Button>
+                <Button customStyle={style.sortButton}>future</Button>
+                <Button customStyle={style.sortButton}>all</Button>
             </View>
         </View>
     )
