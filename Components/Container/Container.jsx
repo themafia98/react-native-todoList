@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text } from 'react-native';
+import style from './Container.style';
+import { View  } from 'react-native';
 
 const Container = ({}) => {
 
     return (
-        <Text>Container</Text>
+       <View style={style.todoListBox}></View>
     )
 };
 

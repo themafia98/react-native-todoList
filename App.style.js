@@ -5,6 +5,7 @@ export default StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: "column",
-      alignItems: "center"
+      alignItems: "center",
+      justifyContent: "space-between"
     },
   });

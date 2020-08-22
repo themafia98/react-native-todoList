@@ -5,7 +5,7 @@ import { Text, TextPropTypes, View } from 'react-native';
 
 const Header = ({ title }) => {
     return (
-    <View>
+    <View style={style.header}>
         <Text style={style.title}>{title}</Text>
         <Controllers />
     </View>
