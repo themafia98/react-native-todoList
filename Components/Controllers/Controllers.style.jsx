@@ -21,7 +21,6 @@ export default StyleSheet.create({
   addButton: {
     width: 120,
     alignSelf: "center",
-    cursor: "pointer",
     backgroundColor: "#c1c1ff"
   },
   sortControllersContainer: {
