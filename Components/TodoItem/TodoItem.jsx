@@ -1,21 +1,28 @@
 import React from 'react';
 import style from './TodoItem.style';
-import { Text } from 'react-native';
-import { string } from 'prop-types';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { string, func } from 'prop-types';
 
-const TodoItem = ({ children }) => {
+const TodoItem = ({ children, onPress, isSelected }) => {
 
-    return(
-        <Text>{children}</Text>
-    );
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <View style={[style.item, isSelected ? style.selected : null]}>
+        <Text style={style.itemText}>{children}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 };
 
 TodoItem.defaultProps = {
-    children: ""
+  isSelected: false,
+  onPress: null,
+  children: ""
 };
 
-TodoItem.propsTypes = {
-    children: string.isRequired
+TodoItem.propTypes = {
+  onPress: func,
+  children: string.isRequired
 }
 
 export default TodoItem;

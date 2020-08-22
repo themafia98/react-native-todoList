@@ -3,9 +3,11 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-      flex: 1,
+      height: "90%",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "space-between"
     },
+    background: {
+      flex: 1
+    }
   });
