@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import style from './ModalWrapper.style';
-import { Text, View, Modal, TouchableHighlight } from "react-native";
+import { Text, Modal, TouchableHighlight, SafeAreaView } from "react-native";
 import { bool, string, oneOfType, oneOf, object } from 'prop-types';
 
-const ModalWrapper = ({ 
-  isActiveVisibility, 
-  titleOpenButton, 
-  titleHideModal, 
-  children, 
-  animationType 
+const ModalWrapper = ({
+  isActiveVisibility,
+  titleOpenButton,
+  titleHideModal,
+  children,
+  animationType
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -17,14 +17,14 @@ const ModalWrapper = ({
   }
 
   return (
-    <View style={style.centeredView}>
+    <SafeAreaView style={style.centeredView}>
       <Modal
         animationType={animationType}
         transparent={true}
         visible={!isActiveVisibility ? true : modalVisible}
       >
-        <View style={style.centeredView}>
-          <View style={style.modalView}>
+        <SafeAreaView style={style.centeredView}>
+          <SafeAreaView style={style.modalView}>
             {children}
             {isActiveVisibility ? (
               <TouchableHighlight
@@ -37,8 +37,8 @@ const ModalWrapper = ({
               </TouchableHighlight>
             ) : null
             }
-          </View>
-        </View>
+          </SafeAreaView>
+        </SafeAreaView>
       </Modal>
 
       {isActiveVisibility ?
@@ -51,7 +51,7 @@ const ModalWrapper = ({
           </Text>
         </TouchableHighlight>
         : null}
-    </View>
+    </SafeAreaView>
   );
 };
 

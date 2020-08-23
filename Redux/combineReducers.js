@@ -3,5 +3,5 @@ import appReducer from "./AppStorage";
 
 
 export default combineReducers({
-    appReducer
+  appReducer
 });

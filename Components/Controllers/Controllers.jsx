@@ -3,7 +3,7 @@ import { v4 as uuid } from 'react-native-uuid';
 import moment from 'moment';
 import DatePicker from 'react-native-datepicker';
 import style from './Controllers.style';
-import { View, TextInput, I18nManager } from 'react-native';
+import { TextInput, SafeAreaView } from 'react-native';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import { addTodoAction, changeSortAction } from '../../Redux/AppStorage/actions';
@@ -36,7 +36,7 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
   };
 
   return (
-    <View style={style.controllers}>
+    <SafeAreaView style={style.controllers}>
       <TextInput
         value={name}
         style={style.inputText}
@@ -57,7 +57,7 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
       >
         add
       </Button>
-      <View style={style.sortControllersContainer}>
+      <SafeAreaView style={style.sortControllersContainer}>
         <Button
           onPress={() => onChangeSort("past")}
           customStyle={style.sortButton}
@@ -82,8 +82,8 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
         >
           all
         </Button>
-      </View>
-    </View>
+      </SafeAreaView>
+    </SafeAreaView>
   )
 };
 

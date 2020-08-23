@@ -1,7 +1,11 @@
-import firebase from "firebase/app";
-import auth from "firebase/auth";
-import firestore from "firebase/firestore";
-import firebaseConfig from "./config";
+import * as firebase from 'firebase';
+
+// Optionally import the services that you want to use
+import "firebase/auth";
+//import "firebase/database";
+import "firebase/firestore";
+//import "firebase/functions";
+//import "firebase/storage";
 
 /**
  * constructor
@@ -13,13 +17,11 @@ class Firebase {
     firebase.initializeApp(firebaseConfig);
     this.auth = firebase.auth();
     this.db = firebase.firestore();
-    this.db.enablePersistence()
-      .then(res => console.warn(res))
-      .catch(er => console.error(er));
   }
 
   /** @return {Object} Object type session */
   saveSession(rules) {
+    // not supported in IOS(react-native)
     return this.auth.setPersistence(firebase.auth.Auth.Persistence[rules]);
   }
 

@@ -21,7 +21,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   onPress: func,
-  customStyle:  number.isRequired,
+  customStyle: number.isRequired,
   children: string
 }
 

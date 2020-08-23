@@ -2,7 +2,7 @@
 // setings in root folder .env
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
+    apiKey: "AIzaSyCWj54OaObaY8iAOSEwiuPED9n11tp_Ucs",
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     databaseURL: process.env.REACT_APP_DATABASE_URL,
     projectId: process.env.REACT_APP_PROJECT_ID,

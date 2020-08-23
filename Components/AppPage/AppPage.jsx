@@ -10,16 +10,17 @@ import FirebaseContext from '../../Models/Helpers/FirebaseContext/Firebase.conte
 import ModalWrapper from '../ModalWrapper';
 import LoginForm from '../LoginForm';
 
-const AppPage = props => {
+const AppPage = () => {
 
   const [isActive, setActive] = useState(null);
 
   const api = useContext(FirebaseContext);
 
   useEffect(() => {
-    const currentUser = api.getCurrentUser();
-    if (currentUser && !isActive) setActive(true);
-    else if (!currentUser && (isActive || isActive === null)) setActive(false);
+    api.auth.onAuthStateChanged(user => {
+      if (user && !isActive) setActive(true);
+      else if (!user && (isActive || isActive === null)) setActive(false);
+    });
   }, []);
 
 
@@ -29,10 +30,10 @@ const AppPage = props => {
       <Container />
     </>
   ) : (
-    <ModalWrapper>
-      <LoginForm />
-    </ModalWrapper>
-  ), []);
+      <ModalWrapper>
+        <LoginForm />
+      </ModalWrapper>
+    ), [isActive]);
 
 
   return (

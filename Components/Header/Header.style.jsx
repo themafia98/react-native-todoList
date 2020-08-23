@@ -11,5 +11,10 @@ export default StyleSheet.create({
     color: "#483d8b",
     textAlign: "center",
     marginBottom: 0,
+  },
+  logoutButton: {
+    position: "absolute",
+    left: 2,
+    top: 5
   }
 });

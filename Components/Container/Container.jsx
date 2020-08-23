@@ -10,13 +10,13 @@ const Container = ({ todosList, sortType }) => {
   const [selectedId, setSelectedId] = useState(null);
 
   const todosListRender = useCallback(({ item = {} }) => (
-      <TodoItem 
-        key={item?.id}
-        onPress={() => setSelectedId(item?.id)}
-        isSelected={item?.id === selectedId}
-      >
-        {item?.name}
-      </TodoItem>
+    <TodoItem
+      key={item?.id}
+      onPress={() => setSelectedId(item?.id)}
+      isSelected={item?.id === selectedId}
+    >
+      {item?.name}
+    </TodoItem>
   ), [todosList, selectedId]);
 
   const sortedDataList = useMemo(() => sortByType(sortType, todosList), [sortType, todosList]);

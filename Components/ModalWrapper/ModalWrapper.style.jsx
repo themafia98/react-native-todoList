@@ -10,11 +10,12 @@ export default StyleSheet.create({
   },
   modalView: {
     backgroundColor: "white",
-    width: "70vw",
-    height: "70vh",
+    width: 400,
+    height: 300,
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
+    justifyContent: "center",
     shadowOffset: {
       width: 0,
       height: 2
