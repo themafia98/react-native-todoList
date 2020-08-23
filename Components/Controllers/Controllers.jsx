@@ -5,8 +5,11 @@ import DatePicker from 'react-native-datepicker';
 import style from './Controllers.style';
 import { View, TextInput } from 'react-native';
 import Button from '../Button/Button';
+import { connect } from 'react-redux';
+import { addTodoAction, changeSortAction } from '../../Redux/AppStorage/actions';
+import { func, string } from 'prop-types';
 
-const Controllers = ({ dateFmt }) => {
+const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState(moment().format(dateFmt));
 
@@ -19,16 +22,16 @@ const Controllers = ({ dateFmt }) => {
   }
 
   const onChangeSort = type => {
-    console.log(type);
+    if (typeof type !== 'string' || sortType === type) return;
+    onSort(type);
   }
 
   const onAddTodo = event => {
-    const todo = {
+    onAdd({
       id: uuid(),
       name,
       date: selectedDate
-    }
-    console.log(todo);
+    });
   };
 
   return (
@@ -48,7 +51,7 @@ const Controllers = ({ dateFmt }) => {
         format={dateFmt}
         onDateChange={onDateChange}
       />
-      <Button 
+      <Button
         onPress={onAddTodo}
         customStyle={style.addButton}
       >
@@ -85,7 +88,31 @@ const Controllers = ({ dateFmt }) => {
 };
 
 Controllers.defaultProps = {
-  dateFmt: "DD.MM.YYYY"
+  onAdd: null,
+  onSort: null,
+  dateFmt: "DD.MM.YYYY",
+  sortType: "all"
 };
 
-export default Controllers;
+Controllers.propTypes = {
+  sortType: string.isRequired,
+  onAdd: func.isRequired,
+  onChangeSort: func.isRequired
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAdd: args => dispatch(addTodoAction(args)),
+    onSort: args => dispatch(changeSortAction(args))
+  }
+};
+
+const mapStateToProps = ({ appReducer }) => {
+  const { sortType } = appReducer;
+
+  return {
+    sortType
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Controllers);

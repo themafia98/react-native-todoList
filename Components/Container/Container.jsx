@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
+import { connect } from 'react-redux';
 import { v4 as uuid } from 'react-native-uuid';
 import style from './Container.style';
 import { SafeAreaView, FlatList } from 'react-native';
 import TodoItem from '../TodoItem';
 
-const Container = ({ items }) => {
+const Container = ({ todosList }) => {
   const [selectedId, setSelectedId] = useState(null);
 
   const todosListRender = useCallback(({ item = {} }) => (
@@ -15,12 +16,12 @@ const Container = ({ items }) => {
       >
         {item?.name}
       </TodoItem>
-  ), [items, selectedId]);
+  ), [todosList, selectedId]);
 
   return (
     <SafeAreaView style={style.todoListBox}>
       <FlatList
-        data={items}
+        data={todosList}
         renderItem={todosListRender}
         keyExtractor={(item) => item?.id || uuid()}
         extraData={selectedId}
@@ -30,13 +31,14 @@ const Container = ({ items }) => {
 };
 
 Container.defaultProps = {
-  items: [
-    { name: "todo 1", id: uuid() }, 
-    { name: "todo 2", id: uuid() },
-    { name: "todo 3", id: uuid() },
-    { name: "todo 4", id: uuid() }, 
-    { name: "todo 5", id: uuid() }
-  ]
+  todosList: []
 };
 
-export default Container;
+const mapStateToProps = ({ appReducer }) => {
+  const { todosList } = appReducer;
+  return {
+    todosList
+  };
+};
+
+export default connect(mapStateToProps)(Container);
