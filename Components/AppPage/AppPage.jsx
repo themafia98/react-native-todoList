@@ -30,9 +30,12 @@ const AppPage = () => {
       <Container />
     </>
   ) : (
-      <ModalWrapper>
-        <LoginForm />
-      </ModalWrapper>
+      <>
+        <Header mode="loginPage" />
+        <ModalWrapper>
+          <LoginForm />
+        </ModalWrapper>
+      </>
     ), [isActive]);
 
 
