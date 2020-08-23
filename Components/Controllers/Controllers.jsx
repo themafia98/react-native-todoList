@@ -3,7 +3,7 @@ import { v4 as uuid } from 'react-native-uuid';
 import moment from 'moment';
 import DatePicker from 'react-native-datepicker';
 import style from './Controllers.style';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, I18nManager } from 'react-native';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import { addTodoAction, changeSortAction } from '../../Redux/AppStorage/actions';
@@ -27,6 +27,7 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
   }
 
   const onAddTodo = event => {
+    setName("");
     onAdd({
       id: uuid(),
       name,
@@ -48,7 +49,6 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
         iconSource={null}
         style={style.datePicker}
         showIcon={false}
-        format={dateFmt}
         onDateChange={onDateChange}
       />
       <Button

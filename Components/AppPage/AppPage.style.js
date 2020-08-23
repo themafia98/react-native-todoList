@@ -7,6 +7,9 @@ export default StyleSheet.create({
       flexDirection: "column",
       alignItems: "center",
     },
+    center: {
+      justifyContent: "center"
+    },
     background: {
       flex: 1
     }
