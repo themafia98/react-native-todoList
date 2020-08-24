@@ -7,6 +7,7 @@ function* fetchTodosList({ payload }) {
   try {
     
     const resultList = yield call(getTodosList, payload);
+    
     yield put(addTodoAction(resultList));
 
   } catch (error) {
@@ -17,8 +18,12 @@ function* fetchTodosList({ payload }) {
 
 function* putNewTodoItem({ payload }) {
   try {
-    yield call(putTodo, payload);
-    yield put(addTodoAction(payload));
+
+    const item = yield call(putTodo, payload);
+
+    if (item) yield put(addTodoAction(item));
+    else throw new Error("invalid put new todo");
+
   } catch(error) {
     console.error(error);
     yield put(addTodoAction([]));

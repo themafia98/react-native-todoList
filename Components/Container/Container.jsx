@@ -12,7 +12,7 @@ const Container = ({ todosList, sortType, onLoadTodosList }) => {
   const [selectedId, setSelectedId] = useState(null);
   const api = useContext(FirebaseContext);
 
-  const { uid = "" } = api.getCurrentUser() || {};
+  const { uid = "" } = useMemo(() => api.getCurrentUser() || {}, [api]);
 
   useEffect(() => {
     if (!onLoadTodosList) return;
@@ -22,6 +22,7 @@ const Container = ({ todosList, sortType, onLoadTodosList }) => {
   const todosListRender = useCallback(({ item = {} }) => (
     <TodoItem
       key={item?.id}
+      className={item?.className || ""}
       onPress={() => setSelectedId(item?.id)}
       isSelected={item?.id === selectedId}
     >

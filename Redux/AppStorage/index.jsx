@@ -10,6 +10,8 @@ const initialState = {
  * id {string}
  * name {string}
  * date {string}
+ * uid {string}
+ * note {string}
  */
 
 const reducer = (state = initialState, { type, payload }) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { v4 as uuid } from 'react-native-uuid';
 import moment from 'moment';
 import DatePicker from 'react-native-datepicker';
@@ -8,11 +8,15 @@ import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import { changeSortAction, fetchPutNewTodo } from '../../Redux/AppStorage/actions';
 import { func, string } from 'prop-types';
-import { addTodoAction } from '../../Redux/Saga/sagas.actions';
+import FirebaseContext from '../../Models/Helpers/FirebaseContext/Firebase.context';
 
 const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState(moment().format(dateFmt));
+
+  const api = useContext(FirebaseContext);
+
+  const { uid = "" } = useMemo(() => api.getCurrentUser() || {}, [api]);
 
   const onDateChange = date => {
     setSelectedDate(date);
@@ -27,12 +31,14 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
     onSort(type);
   }
 
-  const onAddTodo = event => {
+  const onAddTodo = () => {
     setName("");
     onAdd({
       id: uuid(),
       name,
-      date: selectedDate
+      date: selectedDate,
+      note: "",
+      uid
     });
   };
 
@@ -50,6 +56,7 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
         iconSource={null}
         style={style.datePicker}
         showIcon={false}
+        format="DD.MM.YYYY"
         onDateChange={onDateChange}
       />
       <Button

@@ -2,9 +2,10 @@ import api from "../Firebase/instance";
 
 const getTodosList = async (uid = "") => {
   try {
+
     const querySnapshot = await api.db.collection(
-      "todos",
-    ).where("uuid", "==", uid).get();
+      "todos"
+    ).where("uid", "==", uid).get();
 
     const docs = [];
     querySnapshot.forEach(shapshot => docs.push(shapshot.data()));
@@ -19,9 +20,10 @@ const getTodosList = async (uid = "") => {
 const putTodo = async (item = {}) => {
   try {
 
-    const querySnapshot = await api.db.collection("tods").add(item);
-    
-    
+    const querySnapshot = await api.db.collection("todos").add(item);
+    if (querySnapshot && querySnapshot?.path) return item;
+    else throw new Error("Bad put todo");
+
   } catch (error) {
     console.error(error);
     return null;

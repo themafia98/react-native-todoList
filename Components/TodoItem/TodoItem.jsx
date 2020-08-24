@@ -3,11 +3,11 @@ import style from './TodoItem.style';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { string, func } from 'prop-types';
 
-const TodoItem = ({ children, onPress, isSelected }) => {
+const TodoItem = ({ children, onPress, isSelected, className }) => {
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={[style.item, isSelected ? style.selected : null]}>
+      <View style={[style.item, isSelected ? style.selected : null, style?.[className]]}>
         <Text style={style.itemText}>{children}</Text>
       </View>
     </TouchableOpacity>
@@ -17,7 +17,8 @@ const TodoItem = ({ children, onPress, isSelected }) => {
 TodoItem.defaultProps = {
   isSelected: false,
   onPress: null,
-  children: ""
+  children: "",
+  className: ""
 };
 
 TodoItem.propTypes = {

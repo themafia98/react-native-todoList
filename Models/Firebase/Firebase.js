@@ -17,6 +17,7 @@ class Firebase {
     firebase.initializeApp(firebaseConfig);
     this.auth = firebase.auth();
     this.db = firebase.firestore();
+    this.instance = firebase;
   }
 
   /** @return {Object} Object type session */

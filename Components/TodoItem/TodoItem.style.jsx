@@ -20,13 +20,13 @@ export default StyleSheet.create({
     backgroundColor: "red"
   },
   past: {
-
+    backgroundColor: "#808080"
   },
   current: {
-
+    backgroundColor: "#c9d33e"
   },
   future: {
-
+    backgroundColor: "#add8e6"
   },
   all: {
     backgroundColor: "#add8e6"
