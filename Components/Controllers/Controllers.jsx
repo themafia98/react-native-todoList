@@ -6,8 +6,9 @@ import style from './Controllers.style';
 import { TextInput, SafeAreaView } from 'react-native';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
-import { addTodoAction, changeSortAction } from '../../Redux/AppStorage/actions';
+import { changeSortAction, fetchPutNewTodo } from '../../Redux/AppStorage/actions';
 import { func, string } from 'prop-types';
+import { addTodoAction } from '../../Redux/Saga/sagas.actions';
 
 const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
   const [name, setName] = useState("");
@@ -97,12 +98,12 @@ Controllers.defaultProps = {
 Controllers.propTypes = {
   sortType: string.isRequired,
   onAdd: func.isRequired,
-  onChangeSort: func.isRequired
+  onSort: func.isRequired
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAdd: args => dispatch(addTodoAction(args)),
+    onAdd: args => dispatch(fetchPutNewTodo(args)),
     onSort: args => dispatch(changeSortAction(args))
   }
 };

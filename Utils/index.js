@@ -3,7 +3,11 @@ import moment from 'moment';
 const sortByType = (type, items) => {
   const today = moment(moment().format("DD.MM.YYYY"), 'DD.MM.YYYY');
 
-  return items.filter(({ date } = {}) => {
+  return items.filter(item => {
+    if (!item) return false;
+
+    const { date = "" } = item;
+
     const parsedDate = moment(date, "DD.MM.YYYY");
     switch (type) {
       case "current":

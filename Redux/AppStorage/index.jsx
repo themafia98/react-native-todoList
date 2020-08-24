@@ -13,13 +13,18 @@ const initialState = {
  */
 
 const reducer = (state = initialState, { type, payload }) => {
-
   switch (type) {
     case ADD_ITEM: {
       const { todosList: todosListState } = state;
+      const isMassAdd = Array.isArray(payload);
+
+      const todosList = isMassAdd 
+        ? [...todosListState, ...payload] 
+        : [...todosListState, payload];
+
       return {
         ...state,
-        todosList: [...todosListState, payload]
+        todosList
       }
     }
     case REMOVE_ITEM: {

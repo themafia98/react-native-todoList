@@ -1,27 +1,18 @@
-import { ADD_ITEM, REMOVE_ITEM, EDIT_ITEM, EDIT_SORT_TYPE } from "../AppStorage.constant";
+import { FETCH_TODOS_LIST, FETCH_NEW_TODO_ITEM } from "../../Saga/sagas.constant";
+import { EDIT_SORT_TYPE } from "../AppStorage.constant";
 
 
-const addTodoAction = item => {
+const fetchTodosListAction = (uid = "") => {
   return {
-    type: ADD_ITEM,
-    payload: item,
+    type: FETCH_TODOS_LIST,
+    payload: uid
   }
 };
 
-const removeTodoAction = id => {
+const fetchPutNewTodo = item => {
   return {
-    type: REMOVE_ITEM,
-    payload: id
-  }
-};
-
-const changeTodoAction = (id, changes) => {
-  return {
-    type: EDIT_ITEM,
-    payload: {
-      id,
-      changes
-    }
+    type: FETCH_NEW_TODO_ITEM,
+    payload: item
   }
 };
 
@@ -33,8 +24,7 @@ const changeSortAction = type => {
 };
 
 export {
-  addTodoAction,
-  removeTodoAction,
-  changeTodoAction,
+  fetchTodosListAction,
+  fetchPutNewTodo,
   changeSortAction
 };
