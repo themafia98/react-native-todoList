@@ -60,6 +60,7 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
         onDateChange={onDateChange}
       />
       <Button
+        disabled={!name || !selectedDate || !uid}
         onPress={onAddTodo}
         customStyle={style.addButton}
       >

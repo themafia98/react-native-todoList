@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   logoutButton: {
     position: "absolute",
-    left: 2,
-    top: 5
+    left: 5,
+    top: 25
   }
 });

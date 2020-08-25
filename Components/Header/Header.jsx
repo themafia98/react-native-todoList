@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import style from './Header.style';
 import Controllers from '../Controllers';
-import { Text, Button, SafeAreaView } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
+import Button from '../Button';
 import { string } from 'prop-types';
 import FirebaseContext from '../../Models/Helpers/FirebaseContext/Firebase.context';
 
@@ -17,7 +18,7 @@ const Header = ({ title, mode }) => {
   return !isPublicHeader ? (
     <>
       <SafeAreaView style={style.logoutButton}>
-        <Button title="logout" onPress={onLogout} />
+        <Button onPress={onLogout}>logout</Button>
       </SafeAreaView>
       <SafeAreaView style={style.header}>
         <Text style={style.title}>{title}</Text>

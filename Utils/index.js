@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 
-const getClassNameByType = (date, today) => {
+const getClassNameType = (date, today) => {
 
   if (date.isSame(today)) return "current";
   else if (date.isAfter(today)) return "future";
@@ -20,7 +20,7 @@ const sortByType = (type, items) => {
 
     return [
       ...acc,
-      { ...item, className: getClassNameByType(moment(date, "DD.MM.YYYY"), today) }
+      { ...item, className: getClassNameType(moment(date, "DD.MM.YYYY"), today) }
     ]
   }, []);
 

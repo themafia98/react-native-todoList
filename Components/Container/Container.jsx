@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useMemo, useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { v4 as uuid } from 'react-native-uuid';
 import style from './Container.style';
 import { SafeAreaView, FlatList } from 'react-native';
 import TodoItem from '../TodoItem';
@@ -21,10 +20,11 @@ const Container = ({ todosList, sortType, onLoadTodosList }) => {
 
   const todosListRender = useCallback(({ item = {} }) => (
     <TodoItem
-      key={item?.id}
+      id={item.id}
+      key={item.id}
       className={item?.className || ""}
-      onPress={() => setSelectedId(item?.id)}
-      isSelected={item?.id === selectedId}
+      onPress={() => setSelectedId(item.id)}
+      isSelected={item.id === selectedId}
     >
       {item?.name}
     </TodoItem>
@@ -37,7 +37,7 @@ const Container = ({ todosList, sortType, onLoadTodosList }) => {
       <FlatList
         data={sortedDataList}
         renderItem={todosListRender}
-        keyExtractor={(item) => item?.id || uuid()}
+        keyExtractor={(item) => item.id}
         extraData={selectedId}
       />
     </SafeAreaView>

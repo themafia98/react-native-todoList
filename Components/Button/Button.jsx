@@ -4,9 +4,10 @@ import { TouchableOpacity, Text } from 'react-native';
 import style from './Button.style';
 
 
-const Button = ({ children, customStyle, onPress }) => (
+const Button = ({ children, customStyle, onPress, disabled }) => (
   <TouchableOpacity
-    onPress={onPress}
+    disabled={disabled}
+    onPress={!disabled ? onPress : null}
     style={[style.button, customStyle, style?.[children]]}
   >
     <Text style={style.defaultButtonLabel}>{children}</Text>

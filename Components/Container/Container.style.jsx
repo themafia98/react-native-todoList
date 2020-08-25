@@ -12,5 +12,6 @@ export default StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#000",
     flexDirection: "column",
+    maxHeight: 500
   }
 }); 
