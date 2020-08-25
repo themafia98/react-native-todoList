@@ -18,12 +18,14 @@ const Container = ({ todosList, sortType, onLoadTodosList }) => {
       onLoadTodosList(uid);
   }, [uid]);
 
+  const onPressSelect = useCallback((id) => setSelectedId(id), []);
+
   const todosListRender = useCallback(({ item = {} }) => (
     <TodoItem
       id={item.id}
       key={item.id}
       className={item?.className || ""}
-      onPress={() => setSelectedId(item.id)}
+      onPress={onPressSelect.bind(this, item.id)}
       isSelected={item.id === selectedId}
     >
       {item?.name}

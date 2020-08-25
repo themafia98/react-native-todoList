@@ -8,7 +8,7 @@ const Button = ({ children, customStyle, onPress, disabled }) => (
   <TouchableOpacity
     disabled={disabled}
     onPress={!disabled ? onPress : null}
-    style={[style.button, customStyle, style?.[children]]}
+    style={[style.button, customStyle, style?.[children], disabled ? style.disabled : null]}
   >
     <Text style={style.defaultButtonLabel}>{children}</Text>
   </TouchableOpacity>

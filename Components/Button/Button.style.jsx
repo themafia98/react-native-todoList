@@ -27,5 +27,8 @@ export default StyleSheet.create({
   },
   all: {
     backgroundColor: "#008000"
+  },
+  disabled: {
+    backgroundColor: "#bdbdbd"
   }
 });
