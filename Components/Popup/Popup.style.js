@@ -23,9 +23,8 @@ export default StyleSheet.create({
         borderWidth: 5,
         borderStyle: "solid",
         backgroundColor: "#f5f5f5",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)"
+        top: "20%",
+        left: "20%"
     },
     visible: {
         display: "flex"

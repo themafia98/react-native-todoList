@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './Window.style';
 import { Text, Modal, TouchableHighlight, SafeAreaView } from "react-native";
 import { bool, string, oneOfType, oneOf, object } from 'prop-types';

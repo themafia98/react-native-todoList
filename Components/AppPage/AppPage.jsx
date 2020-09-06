@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import style from './AppPage.style';
-import { SafeAreaView, ImageBackground, ActivityIndicator, Text } from 'react-native';
+import { SafeAreaView, ImageBackground, ActivityIndicator } from 'react-native';
 import Header from '../Header';
 import Container from '../Container';
 import background from '../../assets/bg.jpg';

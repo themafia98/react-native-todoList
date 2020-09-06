@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   closePopupButton: {
-    fontSize: "18px",
-    borderRadius: "20px",
+    fontSize: 18,
+    borderRadius: 20,
     borderStyle: "solid",
     borderColor: "#500202",
     backgroundColor: "#f08080",
