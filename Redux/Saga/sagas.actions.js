@@ -2,25 +2,15 @@ import {
   ADD_ITEM, 
   REMOVE_ITEM, 
   EDIT_ITEM, 
-  EDIT_SORT_TYPE 
+  REFRESH_TODOS 
 } from "../AppStorage/AppStorage.constant";
+import { createAction } from 'redux-actions';
 
+export const addTodoAction = createAction(ADD_ITEM);
+export const removeTodoAction = createAction(REMOVE_ITEM);
+export const refreshTodosListAction = createAction(REFRESH_TODOS);
 
-const addTodoAction = item => {
-  return {
-    type: ADD_ITEM,
-    payload: item,
-  }
-};
-
-const removeTodoAction = id => {
-  return {
-    type: REMOVE_ITEM,
-    payload: id
-  }
-};
-
-const changeTodoAction = (id, changes) => {
+export const changeTodoAction = (id, changes) => {
   return {
     type: EDIT_ITEM,
     payload: {
@@ -28,11 +18,4 @@ const changeTodoAction = (id, changes) => {
       changes
     }
   }
-};
-
-
-export {
-  addTodoAction,
-  removeTodoAction,
-  changeTodoAction
 };

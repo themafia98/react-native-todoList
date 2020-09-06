@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import { getTodosList, putTodo } from '../../Models/Api/Api';
-import { addTodoAction } from './sagas.actions';
+import { getTodosList, putTodo, deleteTodo } from '../../Models/Api/Api';
+import { addTodoAction, refreshTodosListAction } from './sagas.actions';
 
 
 function* fetchTodosList({ payload }) {
@@ -30,7 +30,20 @@ function* putNewTodoItem({ payload }) {
   }
 }
 
+function* deleteTodoItem({ payload }) {
+  try {
+    const success = yield call(deleteTodo, payload);
+
+    if (success) yield put(refreshTodosListAction(payload));
+    else throw new Error("Bad delete todo");
+
+  } catch(errpr) {
+    console.error(errror);
+  }
+}
+
 export {
   fetchTodosList,
-  putNewTodoItem
+  putNewTodoItem,
+  deleteTodoItem
 };

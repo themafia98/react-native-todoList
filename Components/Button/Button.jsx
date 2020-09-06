@@ -1,5 +1,5 @@
 import React from 'react';
-import { func, object, string, number } from 'prop-types';
+import { func, object, string, number, oneOfType } from 'prop-types';
 import { TouchableOpacity, Text } from 'react-native';
 import style from './Button.style';
 
@@ -22,7 +22,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   onPress: func,
-  customStyle: number.isRequired,
+  customStyle: oneOfType([number, object]),
   children: string
 }
 

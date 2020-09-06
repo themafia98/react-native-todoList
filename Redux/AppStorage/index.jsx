@@ -4,7 +4,8 @@ import {
   EDIT_ITEM, 
   EDIT_SORT_TYPE, 
   CLOSE_POPUP, 
-  OPEN_POPUP 
+  OPEN_POPUP, 
+  REFRESH_TODOS
 } from "./AppStorage.constant";
 
 const initialState = {
@@ -76,6 +77,13 @@ const reducer = (state = initialState, { type, payload }) => {
             ...changes
           };
         })
+      }
+    }
+    case REFRESH_TODOS: {
+      const { todosList } = state;
+      return {
+        ...state,
+        todosList: todosList.filter(it => it?.id !== payload)
       }
     }
     case EDIT_SORT_TYPE: {

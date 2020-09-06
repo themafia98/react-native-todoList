@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { number, object, string, oneOfType, func, bool, array } from "prop-types";
+import { number, object, string, oneOfType, func, bool, array, oneOf } from "prop-types";
 import { SafeAreaView } from "react-native";
 import style from './Popup.style';
 import Button from "../Button";
@@ -40,7 +40,7 @@ Popup.defaultProps = {
 
 Popup.propTypes = {
   size: string.isRequired,
-  popupId: number.isRequired,
+  popupId: oneOfType([number, oneOf([null])]),
   customVisibilityEvent: func,
   visibility: bool,
   children: oneOfType([number, string, object, array]),

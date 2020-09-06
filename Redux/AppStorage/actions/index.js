@@ -1,46 +1,10 @@
-import { FETCH_TODOS_LIST, FETCH_NEW_TODO_ITEM } from "../../Saga/sagas.constant";
+import { createAction } from 'redux-actions';
+import { FETCH_TODOS_LIST, FETCH_NEW_TODO_ITEM, FETCH_DELETE_ITEM } from "../../Saga/sagas.constant";
 import { EDIT_SORT_TYPE, OPEN_POPUP, CLOSE_POPUP } from "../AppStorage.constant";
 
-
-const fetchTodosListAction = (uid = "") => {
-  return {
-    type: FETCH_TODOS_LIST,
-    payload: uid
-  }
-};
-
-const fetchPutNewTodo = item => {
-  return {
-    type: FETCH_NEW_TODO_ITEM,
-    payload: item
-  }
-};
-
-const onOpenPopupAction = id => {
-  return {
-    type: OPEN_POPUP,
-    payload: id
-  }
-};
-
-const onClosePopupAction = id => {
-  return {
-    type: CLOSE_POPUP,
-    payload: id
-  }
-};
-
-const changeSortAction = type => {
-  return {
-    type: EDIT_SORT_TYPE,
-    payload: type
-  }
-};
-
-export {
-  fetchTodosListAction,
-  fetchPutNewTodo,
-  changeSortAction,
-  onOpenPopupAction,
-  onClosePopupAction
-};
+export const fetchTodosListAction = createAction(FETCH_TODOS_LIST);
+export const fetchPutNewTodo = createAction(FETCH_NEW_TODO_ITEM);
+export const fetchDeleteTodoActin = createAction(FETCH_DELETE_ITEM);
+export const onOpenPopupAction = createAction(OPEN_POPUP);
+export const onClosePopupAction = createAction(CLOSE_POPUP);
+export const changeSortAction = createAction(EDIT_SORT_TYPE);

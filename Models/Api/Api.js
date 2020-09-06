@@ -17,6 +17,24 @@ const getTodosList = async (uid = "") => {
   }
 };
 
+const deleteTodo = async id => {
+  try {
+    const result = await api.db.collection('todos').where("id", "==", id).get();
+
+    if (!result.docs.length) throw new Error("no data for delete");
+
+    for await (let doc of result.docs) {
+      await api.db.collection('todos').doc(doc.id).delete();
+    }
+
+    return true;
+
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
 const putTodo = async (item = {}) => {
   try {
 
@@ -32,5 +50,6 @@ const putTodo = async (item = {}) => {
 
 export {
   getTodosList,
-  putTodo
+  putTodo,
+  deleteTodo
 };

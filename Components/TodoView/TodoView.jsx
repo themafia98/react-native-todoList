@@ -4,7 +4,7 @@ import { Text, SafeAreaView } from 'react-native';
 import Button from '../Button';
 import { useDispatch } from 'react-redux';
 import { func, string } from 'prop-types';
-import { onClosePopupAction } from '../../Redux/AppStorage/actions';
+import { onClosePopupAction, fetchDeleteTodoActin } from '../../Redux/AppStorage/actions';
 
 const TodoView = ({ onPress: onPressProps, id, date, name }) => {
 
@@ -18,8 +18,7 @@ const TodoView = ({ onPress: onPressProps, id, date, name }) => {
   }
 
   const onDeleteTodo = (event) => {
-
-
+    dispatch(fetchDeleteTodoActin(id));
     onClosePopup(event);
   };
 
