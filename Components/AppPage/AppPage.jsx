@@ -1,18 +1,30 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import style from './AppPage.style';
-import { SafeAreaView, ImageBackground, ActivityIndicator } from 'react-native';
+import { SafeAreaView, ImageBackground, ActivityIndicator, Text } from 'react-native';
 import Header from '../Header';
 import Container from '../Container';
 import background from '../../assets/bg.jpg';
 import withFirebase from '../../Models/Helpers/FirebaseContext/withFirebase';
 import FirebaseContext from '../../Models/Helpers/FirebaseContext/Firebase.context';
-import ModalWrapper from '../ModalWrapper';
+import Window from '../Window';
 import LoginForm from '../LoginForm';
+import { useSelector } from 'react-redux';
+import TodoView from '../TodoView';
+import Popup from '../Popup';
 
 const AppPage = () => {
 
   const [isActive, setActive] = useState(null);
+  const [isPopupActive, setPopupActive] = useState(false);
+
+  const { popupId, popupData } = useSelector(state => {
+    const { openPopupId: popupId, popupData } = state.appReducer;
+    return {
+      popupId,
+      popupData
+    }
+  });
 
   const api = useContext(FirebaseContext);
 
@@ -23,20 +35,32 @@ const AppPage = () => {
     });
   }, []);
 
+  const onChangePopupVisibility = () => setPopupActive(visible => !visible);
+
 
   const appContent = useMemo(() => isActive ? (
-    <>
+    <SafeAreaView style={style.appContainer}>
       <Header />
-      <Container />
-    </>
+      <Container onChangePopupVisibility={onChangePopupVisibility} />
+      <Popup 
+        customVisibilityEvent={onChangePopupVisibility}  
+        popupId={popupId} 
+        visibility={isPopupActive}
+      >
+        <TodoView 
+          onPress={onChangePopupVisibility} 
+          {...popupData}
+        />
+      </Popup>
+    </SafeAreaView>
   ) : (
       <>
         <Header mode="loginPage" />
-        <ModalWrapper>
+        <Window>
           <LoginForm />
-        </ModalWrapper>
+        </Window>
       </>
-    ), [isActive]);
+    ), [isActive, popupId, popupData, isPopupActive]);
 
 
   return (

@@ -37,5 +37,8 @@ export default StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  isAbosulute: {
+    position: "absolute"
   }
 });

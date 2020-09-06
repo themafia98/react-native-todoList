@@ -6,8 +6,9 @@ import TodoItem from '../TodoItem';
 import { sortByType } from '../../Utils';
 import { fetchTodosListAction } from '../../Redux/AppStorage/actions';
 import FirebaseContext from '../../Models/Helpers/FirebaseContext/Firebase.context';
+import { func, array, string } from 'prop-types';
 
-const Container = ({ todosList, sortType, onLoadTodosList }) => {
+const Container = ({ onChangePopupVisibility, todosList, sortType, onLoadTodosList }) => {
   const [selectedId, setSelectedId] = useState(null);
   const api = useContext(FirebaseContext);
 
@@ -18,7 +19,11 @@ const Container = ({ todosList, sortType, onLoadTodosList }) => {
       onLoadTodosList(uid);
   }, [uid]);
 
-  const onPressSelect = useCallback((id) => setSelectedId(id), []);
+  const onPressSelect = useCallback((id) => {
+    setSelectedId(id);
+    
+    if (onChangePopupVisibility) onChangePopupVisibility();
+  }, [onChangePopupVisibility, setSelectedId]);
 
   const todosListRender = useCallback(({ item = {} }) => (
     <TodoItem
@@ -47,8 +52,15 @@ const Container = ({ todosList, sortType, onLoadTodosList }) => {
 };
 
 Container.defaultProps = {
+  onChangePopupVisibility: null,
   todosList: [],
   sortType: "all"
+};
+
+Container.propTypes = {
+  onChangePopupVisibility: func,
+  todosList: array.isRequired,
+  sortType: string.isRequired
 };
 
 const mapStateToProps = ({ appReducer }) => {

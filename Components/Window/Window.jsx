@@ -1,28 +1,16 @@
 import React, { useState } from 'react';
-import style from './ModalWrapper.style';
+import style from './Window.style';
 import { Text, Modal, TouchableHighlight, SafeAreaView } from "react-native";
 import { bool, string, oneOfType, oneOf, object } from 'prop-types';
 
-const ModalWrapper = ({
+const Window = ({
   isActiveVisibility,
   titleOpenButton,
   titleHideModal,
-  children,
-  animationType
-}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const onPress = () => {
-    setModalVisible(state => !state);
-  }
-
-  return (
+  children
+}) => (
     <SafeAreaView style={style.centeredView}>
-      <Modal
-        animationType={animationType}
-        transparent={true}
-        visible={!isActiveVisibility ? true : modalVisible}
-      >
+      <Modal>
         <SafeAreaView style={style.centeredView}>
           <SafeAreaView style={style.modalView}>
             {children}
@@ -51,11 +39,10 @@ const ModalWrapper = ({
           </Text>
         </TouchableHighlight>
         : null}
-    </SafeAreaView>
-  );
-};
+     </SafeAreaView>
+);
 
-ModalWrapper.defaultProps = {
+Window.defaultProps = {
   children: null,
   isActiveVisibility: false,
   animationType: "fade",
@@ -63,7 +50,7 @@ ModalWrapper.defaultProps = {
   titleOpenButton: ""
 };
 
-ModalWrapper.propTypes = {
+Window.propTypes = {
   children: oneOfType([object, oneOf([null])]),
   animationType: string.isRequired,
   isActiveVisibility: bool.isRequired,
@@ -71,4 +58,4 @@ ModalWrapper.propTypes = {
   titleOpenButton: string.isRequired
 }
 
-export default ModalWrapper;
+export default Window;

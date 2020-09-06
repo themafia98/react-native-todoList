@@ -1,5 +1,5 @@
 import { FETCH_TODOS_LIST, FETCH_NEW_TODO_ITEM } from "../../Saga/sagas.constant";
-import { EDIT_SORT_TYPE, OPEN_POPUP } from "../AppStorage.constant";
+import { EDIT_SORT_TYPE, OPEN_POPUP, CLOSE_POPUP } from "../AppStorage.constant";
 
 
 const fetchTodosListAction = (uid = "") => {
@@ -23,6 +23,13 @@ const onOpenPopupAction = id => {
   }
 };
 
+const onClosePopupAction = id => {
+  return {
+    type: CLOSE_POPUP,
+    payload: id
+  }
+};
+
 const changeSortAction = type => {
   return {
     type: EDIT_SORT_TYPE,
@@ -34,5 +41,6 @@ export {
   fetchTodosListAction,
   fetchPutNewTodo,
   changeSortAction,
-  onOpenPopupAction
+  onOpenPopupAction,
+  onClosePopupAction
 };
