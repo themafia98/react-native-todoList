@@ -3,10 +3,10 @@ import style from './TodoView.style';
 import { Text, SafeAreaView } from 'react-native';
 import Button from '../Button';
 import { useDispatch } from 'react-redux';
-import { func } from 'prop-types';
+import { func, string } from 'prop-types';
 import { onClosePopupAction } from '../../Redux/AppStorage/actions';
 
-const TodoView = ({ onPress: onPressProps, id }) => {
+const TodoView = ({ onPress: onPressProps, id, date, name }) => {
 
   const dispatch = useDispatch();
 
@@ -17,6 +17,12 @@ const TodoView = ({ onPress: onPressProps, id }) => {
     else console.error("Bad id for open popup");
   }
 
+  const onDeleteTodo = (event) => {
+
+
+    onClosePopup(event);
+  };
+
   return (
     <SafeAreaView>
       <Button 
@@ -25,22 +31,49 @@ const TodoView = ({ onPress: onPressProps, id }) => {
       > 
         X 
       </Button>
-      <SafeAreaView style={style.popupContentSection}>
-        <Text>11.11.11</Text>
-        <Button>Delete todo</Button>
-        <Text>Title</Text>
-        <Text>additional notes</Text>
-        <Text>click for add note</Text>
+      <SafeAreaView 
+        style={style.popupContentSection}
+      >
+        <Text 
+          style={style.todoText}
+        >
+          {date}
+        </Text>
+        <Button 
+          onPress={onDeleteTodo} 
+          customStyle={style.deleteTodoButton}
+        >
+          Delete todo
+        </Button>
+        <Text 
+          style={style.todoText}
+        >
+          {name}
+        </Text>
+        <Text 
+          style={style.noteText}
+        >
+          additional notes
+        </Text>
+        <Text 
+          style={style.editableText}
+        >
+          click for add note
+        </Text>
       </SafeAreaView>
     </SafeAreaView>
   )
 };
 
 TodoView.defaultProps = {
+  date: "",
+  name: "",
   onPressProps: null
 };
 
 TodoView.propTypes = {
+  date: string.isRequired,
+  name: string.isRequired,
   onPressProps: func
 };
 
