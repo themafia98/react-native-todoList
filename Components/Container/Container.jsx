@@ -1,27 +1,29 @@
 import React, { useCallback, useState, useMemo, useContext, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import style from './Container.style';
 import { SafeAreaView, FlatList } from 'react-native';
 import TodoItem from '../TodoItem';
 import { sortByType } from '../../Utils';
 import { fetchTodosListAction } from '../../Redux/AppStorage/actions';
 import FirebaseContext from '../../Models/Helpers/FirebaseContext/Firebase.context';
-import { func, array, string } from 'prop-types';
+import { func } from 'prop-types';
 
-const Container = ({ onChangePopupVisibility, todosList, sortType, onLoadTodosList }) => {
+const Container = ({ onChangePopupVisibility }) => {
   const [selectedId, setSelectedId] = useState(null);
   const api = useContext(FirebaseContext);
 
+  const dispatch = useDispatch();
+
+  const [todosList, sortType] = useSelector(({ appReducer }) => ([appReducer.todosList, appReducer.sortType]));
   const { uid = "" } = useMemo(() => api.getCurrentUser() || {}, [api]);
 
   useEffect(() => {
-    if (!onLoadTodosList) return;
-      onLoadTodosList(uid);
+    dispatch(fetchTodosListAction(uid));
   }, [uid]);
 
   const onPressSelect = useCallback((id) => {
     setSelectedId(id);
-    
+
     if (onChangePopupVisibility) onChangePopupVisibility();
   }, [onChangePopupVisibility, setSelectedId]);
 
@@ -53,28 +55,10 @@ const Container = ({ onChangePopupVisibility, todosList, sortType, onLoadTodosLi
 
 Container.defaultProps = {
   onChangePopupVisibility: null,
-  todosList: [],
-  sortType: "all"
 };
 
 Container.propTypes = {
   onChangePopupVisibility: func,
-  todosList: array.isRequired,
-  sortType: string.isRequired
 };
 
-const mapStateToProps = ({ appReducer }) => {
-  const { todosList, sortType } = appReducer;
-  return {
-    todosList,
-    sortType
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onLoadTodosList: uid => dispatch(fetchTodosListAction(uid))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Container);
+export default Container;

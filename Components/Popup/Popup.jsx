@@ -8,9 +8,7 @@ const Popup = ({ popupId, size, customVisibilityEvent, visibility, children }) =
   const [visible, setVisible] = useState(false);
 
   const isUncontrolledVisibility = customVisibilityEvent !== null;
-
   const onChangeVisibility = () => setVisible(visibility => !visibility);
-
 
   if (!popupId) return null;
 
@@ -19,9 +17,15 @@ const Popup = ({ popupId, size, customVisibilityEvent, visibility, children }) =
     {!isUncontrolledVisibility ? (
       <Button onPress={onChangeVisibility}>Open popup</Button>
     ) : null}
-    <SafeAreaView style={style.poupWrapper}>
+    <SafeAreaView 
+      style={style.poupWrapper}
+    >
       <SafeAreaView
-        style={[style.popup, style[size], (visible || visibility) && style.visible]}
+        style={[
+          style.popup, 
+          style[size], 
+          (visible || visibility) && style.visible
+        ]}
       >
         {children}
       </SafeAreaView>
@@ -39,8 +43,8 @@ Popup.defaultProps = {
 };
 
 Popup.propTypes = {
-  size: string.isRequired,
-  popupId: oneOfType([number, oneOf([null])]),
+  size: string,
+  popupId: oneOfType([string, oneOf([null])]),
   customVisibilityEvent: func,
   visibility: bool,
   children: oneOfType([number, string, object, array]),

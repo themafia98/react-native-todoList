@@ -5,17 +5,19 @@ import DatePicker from 'react-native-datepicker';
 import style from './Controllers.style';
 import { TextInput, SafeAreaView } from 'react-native';
 import Button from '../Button/Button';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { changeSortAction, fetchPutNewTodo } from '../../Redux/AppStorage/actions';
-import { func, string } from 'prop-types';
+import { string } from 'prop-types';
 import FirebaseContext from '../../Models/Helpers/FirebaseContext/Firebase.context';
 
-const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
+const Controllers = ({ dateFmt }) => {
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState(moment().format(dateFmt));
 
+  const dispatch = useDispatch();
   const api = useContext(FirebaseContext);
 
+  const sortType = useSelector(({ appReducer }) => appReducer.sortType);
   const { uid = "" } = useMemo(() => api.getCurrentUser() || {}, [api]);
 
   const onDateChange = date => {
@@ -28,18 +30,18 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
 
   const onChangeSort = type => {
     if (typeof type !== 'string' || sortType === type) return;
-    onSort(type);
+    dispatch(changeSortAction(type));
   }
 
   const onAddTodo = () => {
     setName("");
-    onAdd({
+    dispatch(fetchPutNewTodo({
       id: uuid(),
       name,
       date: selectedDate,
       note: "",
       uid
-    });
+    }));
   };
 
   return (
@@ -97,31 +99,11 @@ const Controllers = ({ dateFmt, onAdd, sortType, onSort }) => {
 };
 
 Controllers.defaultProps = {
-  onAdd: null,
-  onSort: null,
   dateFmt: "DD.MM.YYYY",
-  sortType: "all"
 };
 
 Controllers.propTypes = {
-  sortType: string.isRequired,
-  onAdd: func.isRequired,
-  onSort: func.isRequired
+  dateFmt: string,
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAdd: args => dispatch(fetchPutNewTodo(args)),
-    onSort: args => dispatch(changeSortAction(args))
-  }
-};
-
-const mapStateToProps = ({ appReducer }) => {
-  const { sortType } = appReducer;
-
-  return {
-    sortType
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Controllers);
+export default Controllers;

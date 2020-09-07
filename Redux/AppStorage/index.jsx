@@ -1,11 +1,10 @@
-import { 
-  ADD_ITEM, 
-  REMOVE_ITEM, 
-  EDIT_ITEM, 
-  EDIT_SORT_TYPE, 
-  CLOSE_POPUP, 
-  OPEN_POPUP, 
-  REFRESH_TODOS
+import {
+  ADD_ITEM,
+  REMOVE_ITEM,
+  EDIT_NOTE,
+  EDIT_SORT_TYPE,
+  CLOSE_POPUP,
+  OPEN_POPUP
 } from "./AppStorage.constant";
 
 const initialState = {
@@ -49,8 +48,8 @@ const reducer = (state = initialState, { type, payload }) => {
       const { todosList: todosListState } = state;
       const isMassAdd = Array.isArray(payload);
 
-      const todosList = isMassAdd 
-        ? [...todosListState, ...payload] 
+      const todosList = isMassAdd
+        ? [...todosListState, ...payload]
         : [...todosListState, payload];
 
       return {
@@ -65,25 +64,18 @@ const reducer = (state = initialState, { type, payload }) => {
         todosList: todosList.filter(({ id } = {}) => id !== payload)
       }
     }
-    case EDIT_ITEM: {
+    case EDIT_NOTE: {
       const { todosList } = state;
-      const { id = "", changes = {} } = payload;
+      const { id = "", note = "" } = payload;
       return {
         ...state,
         todosList: todosList.map(item => {
-          if (item?.id !== id) return item;
+          if (item.id !== id) return item;
           return {
             ...item,
-            ...changes
+            note
           };
         })
-      }
-    }
-    case REFRESH_TODOS: {
-      const { todosList } = state;
-      return {
-        ...state,
-        todosList: todosList.filter(it => it?.id !== payload)
       }
     }
     case EDIT_SORT_TYPE: {

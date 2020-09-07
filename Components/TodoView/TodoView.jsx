@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './TodoView.style';
-import { Text, SafeAreaView } from 'react-native';
+import { Text, SafeAreaView, TextInput } from 'react-native';
 import Button from '../Button';
 import { useDispatch } from 'react-redux';
 import { func, string } from 'prop-types';
-import { onClosePopupAction, fetchDeleteTodoActin } from '../../Redux/AppStorage/actions';
+import { onClosePopupAction, fetchDeleteTodoActin, fetchEditNoteAction } from '../../Redux/AppStorage/actions';
 
-const TodoView = ({ onPress: onPressProps, id, date, name }) => {
+const TodoView = ({ onPress: onPressProps, id, date, name, note }) => {
+
+  const [noteValue, setNoteValue] = useState(note);
+  const [isEditable, setEditable] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -15,9 +18,18 @@ const TodoView = ({ onPress: onPressProps, id, date, name }) => {
 
     if (id) dispatch(onClosePopupAction(id));
     else console.error("Bad id for open popup");
+  };
+
+  const onChangeNote = noteText => setNoteValue(noteText);
+  const onChangeNoteMode = () => setEditable(state => !state);
+
+  const onSubmitNote = () => {
+    onChangeNoteMode();
+
+    dispatch(fetchEditNoteAction({ id, note: noteValue }))
   }
 
-  const onDeleteTodo = (event) => {
+  const onDeleteTodo = event => {
     dispatch(fetchDeleteTodoActin(id));
     onClosePopup(event);
   };
@@ -52,27 +64,48 @@ const TodoView = ({ onPress: onPressProps, id, date, name }) => {
         <Text 
           style={style.noteText}
         >
-          additional notes
+            additional notes
         </Text>
-        <Text 
-          style={style.editableText}
-        >
-          click for add note
-        </Text>
+        {!isEditable ? (
+          <Text 
+            onPress={onChangeNoteMode}
+            style={style.editableText}
+          >
+            {noteValue}
+          </Text>
+        )
+        : (
+          <>
+            <TextInput
+              multiline={true}
+              value={noteValue}
+              style={style.editableText}
+              onChangeText={onChangeNote}
+            />
+            <Button 
+              customStyle={style.submitNoteButton}
+              onPress={onSubmitNote}
+            >
+              Edit
+            </Button>
+          </>
+        )}
       </SafeAreaView>
     </SafeAreaView>
   )
 };
 
 TodoView.defaultProps = {
-  date: "",
+  onPressProps: null,
   name: "",
-  onPressProps: null
+  date: "",
+  note: "click for add note"
 };
 
 TodoView.propTypes = {
-  date: string.isRequired,
-  name: string.isRequired,
+  date: string,
+  name: string,
+  note: string,
   onPressProps: func
 };
 

@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   closePopupButton: {
-    fontSize: 18,
     borderRadius: 20,
     borderStyle: "solid",
     borderColor: "#500202",
@@ -22,6 +21,15 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ff0000",
     padding: 10,
+    width: "50%",
+    minHeight: "50%",
+    maxHeight: "50%",
+    textAlign: "center"
+  },
+  submitNoteButton: {
+    marginTop: 5,
+    backgroundColor: "#ff0000",
+    borderRadius: 0
   },
   deleteTodoButton: {
     width: 110,

@@ -42,13 +42,13 @@ const AppPage = () => {
     <SafeAreaView style={style.appContainer}>
       <Header />
       <Container onChangePopupVisibility={onChangePopupVisibility} />
-      <Popup 
-        customVisibilityEvent={onChangePopupVisibility}  
-        popupId={popupId} 
+      <Popup
+        customVisibilityEvent={onChangePopupVisibility}
+        popupId={popupId}
         visibility={isPopupActive}
       >
-        <TodoView 
-          onPress={onChangePopupVisibility} 
+        <TodoView
+          onPress={onChangePopupVisibility}
           {...popupData}
         />
       </Popup>

@@ -48,8 +48,29 @@ const putTodo = async (item = {}) => {
   }
 };
 
+const editTodoNote = async ({ id, note }) => {
+  try {
+    const result = await api.db.collection('todos').where("id", "==", id).get();
+
+    if (!result.docs.length) throw new Error("no data for edit note");
+
+    for await (const doc of result.docs) {
+      await api.db.collection('todos').doc(doc.id).update({
+        note
+      });
+    }
+    
+    return true;
+
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
 export {
   getTodosList,
   putTodo,
-  deleteTodo
+  deleteTodo,
+  editTodoNote
 };

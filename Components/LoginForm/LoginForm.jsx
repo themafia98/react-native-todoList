@@ -68,7 +68,11 @@ const LoginForm = () => {
 
   return (
     <SafeAreaView>
-      <Text style={style.formTitle}>{isRegMode ? "Registration form" : "Login form"}</Text>
+      <Text 
+        style={style.formTitle}
+      >
+        {isRegMode ? "Registration form" : "Login form"}
+      </Text>
       {msg ? <Text style={style.error}>{msg}</Text> : null}
       {isLoading ? <ActivityIndicator size="small" /> : null}
       <SafeAreaView style={style.form}>
@@ -87,10 +91,18 @@ const LoginForm = () => {
           defaultValue=""
         />
         <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-          <Text style={style.submitButton}>Submit</Text>
+          <Text 
+            style={style.submitButton}
+          >
+            Submit
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onChangeMode}>
-          <Text style={style.modeText} >{isRegMode ? "to login form" : "registration"}</Text>
+          <Text 
+            style={style.modeText} 
+          >
+            {isRegMode ? "to login form" : "registration"}
+          </Text>
         </TouchableOpacity>
       </SafeAreaView>
     </SafeAreaView>
